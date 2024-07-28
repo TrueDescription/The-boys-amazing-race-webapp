@@ -7,9 +7,9 @@ function Login() {
         <div className='loginDiv'>
             <form>
                 <h1>Enter Team Pin:</h1>
-                <input>Eg: 1234</input>
-                <button>Login</button>
-                <button>Sign Up</button>
+                <input type="text" placeholder="Eg: 1234" />
+                <button type='submit'>Login</button>
+                <button type='submit'>Sign Up</button>
             </form>
         </div>
     );
