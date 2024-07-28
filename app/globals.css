@@ -38,3 +38,11 @@ body {
   font-weight: 100;
   font-style: normal;
 }
+
+.loginDiv {
+  display: block;
+  align-items: center;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}

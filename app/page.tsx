@@ -1,9 +1,10 @@
 import Image from "next/image";
+import { Login } from "@/components/ui/login";
 
 export default function Home() {
   return (
     <main>
-      <h1 className="montserrat-fontest">Hello World!</h1>
+      <Login/>
     </main>
   );
 }
