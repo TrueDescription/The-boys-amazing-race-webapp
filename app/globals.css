@@ -31,3 +31,10 @@ body {
     text-wrap: balance;
   }
 }
+
+.montserrat-fontest {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
