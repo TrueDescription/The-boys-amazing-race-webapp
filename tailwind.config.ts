@@ -3,10 +3,11 @@ import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@nextui-org/theme/dist/components/{button,card,input,ripple,spinner}.js', // corrected line
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "// corrected line",
+    "./node_modules/@nextui-org/theme/dist/components/(button|card|checkbox|input|progress|table|ripple|spinner|spacer).js"
   ],
   theme: {
     extend: {

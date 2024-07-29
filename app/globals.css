@@ -4,16 +4,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
 
 .montserrat-fontest {
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 100;
-  font-style:bold;
-  font-size: 40px;
+  font-size: 40px; */
 }
 
 
 
-.CenteredDiv {
+/* .CenteredDiv {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,7 +21,9 @@
   margin: auto;
   height: 100vh;
   width: 50%;
-}
+} */
+
+
 
 .CenteredDiv h1 {
   text-align: center;
@@ -41,4 +42,59 @@
 }
 .loginCard Button {
   margin: 5px;
+}
+
+
+.CenteredDivTask {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: fit-content;
+  margin: auto;
+  height: 100vh;
+  width: 90%;
+}
+
+.CenteredDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 1rem;
+  background-color: #f9fafb;
+}
+
+.CardBody {
+  padding: 1rem;
+}
+
+.CardHeader {
+  padding: 1rem;
+  background-color: #f1f5f9;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.CardFooter {
+  padding: 1rem;
+  background-color: #f1f5f9;
+  border-top: 1px solid #e5e7eb;
+}
+
+.montserrat-font {
+  /* font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  text-align: center; */
+}
+
+.riddleInput {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.correct-answer {
+  background-color: #38b000;
 }

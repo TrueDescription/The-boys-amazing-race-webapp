@@ -1,27 +1,36 @@
 "use client";
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { toast, ToastContainer } from 'react-toastify';import '@/app/globals.css'
 import { Client } from '@vercel/postgres';
 import {Input} from "@nextui-org/input";
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 import {Button, ButtonGroup} from "@nextui-org/button";
 
+interface LoginProps {
+    onSuccess: () => void;
+  }
 
-
-function Login() {
+const Login = () => {
 
     // const [pin, setPin] = useState('');
-    // const router = useRouter();
+    const router = useRouter()
     const [pin, setPin] = useState('');
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    
 
     const loginHandler = async () => {
         // check if pin is 4 digets otherwise error
         // make the api call to /api
         // handle return value
         // route with routeer
+        if (pin === "1111" ) {
+            console.log('Login successful');
+            router.push('/riddle'); // Redirect to the riddle page
+        } else {
+            console.log('Login failed');
+        }
     }
     const signupHandler = async () => {
     }
