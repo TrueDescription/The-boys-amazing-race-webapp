@@ -1,6 +1,6 @@
 import { sql } from "@vercel/postgres";
 
-export default async function handler(req, res) {
+export default async function loginHandler(req, res) {
   if (req.method == 'POST') {
     const { pin } = req.body;
     try {

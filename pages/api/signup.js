@@ -1,7 +1,6 @@
-// pages/api/signup.js
 import { sql } from "@vercel/postgres";
 
-export default async function handler(req, res) {
+export default async function signupHandler(req, res) {
   if (req.method === 'POST') {
     const { pin } = req.body;
     if (pin.length === 4) {
