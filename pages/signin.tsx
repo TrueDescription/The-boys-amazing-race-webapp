@@ -16,7 +16,7 @@ interface LoginProps {
     onSuccess: () => void;
   }
 
-const Login = () => {
+export default function Login() {
 
     const router = useRouter()
     const [pin, setPin] = useState('');
