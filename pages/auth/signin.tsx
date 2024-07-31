@@ -8,6 +8,8 @@ import { Client } from '@vercel/postgres';
 import {Input} from "@nextui-org/input";
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 import {Button, ButtonGroup} from "@nextui-org/button";
+import { signIn } from 'next-auth/react';
+
 
 
 interface LoginProps {
@@ -16,23 +18,21 @@ interface LoginProps {
 
 const Login = () => {
 
-    // const [pin, setPin] = useState('');
     const router = useRouter()
     const [pin, setPin] = useState('');
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     
 
     const loginHandler = async () => {
-        // check if pin is 4 digets otherwise error
-        // make the api call to /api
-        // handle return value
-        // route with routeer
-        console.log("PIN input is:", pin); 
-        if (pin === "1111" ) {
+        const result = await signIn('credentials', {
+            redirect: false,
+            pin: pin,
+        });
+        if (result?.ok) {
             console.log('Login successful');
             router.push('/riddle'); // change this to redirect to correct page state
         } else {
-            toast('Incorrect PIN', {
+            toast.error('Incorrect PIN', {
                 position: "bottom-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -46,6 +46,25 @@ const Login = () => {
         }
     }
     const signupHandler = async () => {
+        const response = await fetch('/api/auth/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pin })
+        });
+        if (response.ok) {
+            console.log('Signup Valid');
+        } else {
+            toast.error('Invalid PIN', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
     }
 
     

@@ -6,8 +6,7 @@ import {Input} from "@nextui-org/input";
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 import {Progress} from "@nextui-org/progress";
 
-
-
+   
 
 function RiddlePage() {
     const [answer, setAnswer] = useState('');
@@ -17,7 +16,7 @@ function RiddlePage() {
     const router = useRouter();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
+        const value = e.target.value.toLowerCase();
         if (value === "test") {
             console.log('success');
             setIsCorrect(true);

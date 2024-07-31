@@ -1,6 +1,6 @@
 "use client";
 
-import { Login } from "@/components/ui/login";
+import { Login } from "@/pages/auth/signin";
 import { RiddlePage } from "@/components/ui/riddle";
 import { Task } from "@/components/ui/task";
 import { useRouter } from "next/router";
