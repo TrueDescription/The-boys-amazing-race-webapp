@@ -4,9 +4,11 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 // CREATE TABLE team (
 //     pin INTEGER,
-//     stage VARCHAR,
-//     stageText JSON
+//     pageState INTEGER,
+//     riddleStage INTEGER,
+//     taskStage INTEGER
 // );
+
 
 export default NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
@@ -35,6 +37,20 @@ export default NextAuth({
   ],
   session: {
     strategy: 'jwt',
+  },
+  callbacks: {
+    jwt: async ({ token, user }) => {
+      if (user) {
+        token.pin = user.pin;
+      }
+      return token;
+    },
+    session: async ({ session, token }) => {
+      if (token.pin) {
+        session.user.pin = token.pin;
+      }
+      return session;
+    }
   },
   pages: {
     signIn: '/auth/signin',

@@ -2,42 +2,57 @@
 
 import React, { useState, useEffect } from 'react';
 import { Checkbox } from "@nextui-org/checkbox";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Spinner } from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
 import {Progress} from "@nextui-org/progress";
 import { useRouter } from 'next/navigation';
+import { signIn, useSession } from 'next-auth/react';
+import stageData from '@/data/stageData.json'
+
 
 type TaskType = {
     id: number;
     text: string;
 };
 
-const tasks: TaskType[] = [
-    { id: 1, text: "Become the president of the world!" },
-    { id: 2, text: "Complete the marathon!" },
-    { id: 3, text: "Learn a new language!" }
-];
+const tasks: TaskType[] = [];
+const optionalTasks: TaskType[] = [];
 
 function Task() {
+    
+
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const [submitted, setSubmitted] = useState(true);
+    const [progress, setProgress] = useState(0);
+    const [loadingData, setLoadingData] = useState(true);
+    // const [optional, setOptional] = useState(false);
+    const router = useRouter();
+
     const [checkboxStates, setCheckboxStates] = useState<Record<number, boolean>>(
         tasks.reduce((acc, task) => {
             acc[task.id] = false;
             return acc;
         }, {} as Record<number, boolean>)
     );
-
-    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-    const [submitted, setSubmitted] = useState(true);
-    const [progress, setProgress] = useState(0);
-    const router = useRouter();
+    const [optionalStates, setOptionalStates] = useState<Record<number, boolean>>(
+        tasks.reduce((acc, task) => {
+            acc[task.id] = false;
+            return acc;
+        }, {} as Record<number, boolean>)
+    );
 
     useEffect(() => {
+        if (loadingData) return;
         const allChecked = Object.values(checkboxStates).every(Boolean);
         setIsButtonDisabled(!allChecked);
     }, [checkboxStates]);
 
     const handleCheckboxChange = (id: number) => {
         setCheckboxStates((prev) => ({ ...prev, [id]: !prev[id] }));
+    };
+
+    const handleOptionalChange = (id: number) => {
+        setOptionalStates((prev) => ({ ...prev, [id]: !prev[id] }));
     };
 
     function submitTask() {
@@ -54,6 +69,54 @@ function Task() {
             router.push("/riddle");
         }, 3000);
     }
+    
+    const { data: session, status } = useSession();
+    useEffect(() => {
+        if (status === 'loading') return; 
+        else if (!session || !session.user) {
+          signIn();
+        } else if (session && session?.user?.pin) {
+            const pin = session.user.pin;
+            fetch('/api/getUserData', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pin })
+            }).then(response => {
+                if (response.ok) {
+                    const data = response.json();
+                    return data;
+                }
+            }).then(data => {
+                tasks.length = 0;
+                optionalTasks.length = 0;
+                if (data.hasOwnProperty('pageState') && data.hasOwnProperty('riddleStage') && data.hasOwnProperty('taskStage')) {
+                    if (data.pageState == 1) { 
+                        router.push('/riddle');
+                        return;
+                    }
+                    const currStageData = stageData['taskPage']['stages'][data.taskStage];
+                    currStageData.requiredTasks.forEach((element, i) => {
+                        tasks.push({id: i, text : element});
+                    });
+                    if (stageData['taskPage']['stages'][data.taskStage].hasOwnProperty('optionalTasks')) {
+                        currStageData.optionalTasks?.forEach((element, i) => {
+                            optionalTasks.push({id: i, text : element});
+                        });
+                    }
+                    setLoadingData(false);
+                }
+            });
+            // pull data from db using pin
+        }
+      }, [session, status]);
+
+    if (status === 'loading' || !session || loadingData) {
+        return (
+            <div className='CenteredDiv'>
+                <Spinner label="Loading..." />
+            </div>
+        );
+    }     
 
     return (
         <div className='CenteredDivTask'>
@@ -80,6 +143,33 @@ function Task() {
                                         onChange={() => handleCheckboxChange(task.id)}
                                     />
                                         
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                    
+                </Table>
+                <Table >
+                    <TableHeader>
+                        <TableColumn>
+                            Optional Task
+                        </TableColumn>
+                        <TableColumn>
+                            Completion
+                        </TableColumn>
+                    </TableHeader>
+                    <TableBody>
+                        {optionalTasks.map((oTask) => (
+                            <TableRow key={oTask.id}>
+                                <TableCell>
+                                    {oTask.text}
+                                </TableCell>
+                                <TableCell>
+                                    <Checkbox
+                                        size="lg"
+                                        isSelected={optionalStates[oTask.id]}
+                                        onChange={() => handleOptionalChange(oTask.id)}
+                                    />  
                                 </TableCell>
                             </TableRow>
                         ))}

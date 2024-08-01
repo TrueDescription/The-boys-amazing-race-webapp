@@ -98,3 +98,7 @@
 .correct-answer {
   background-color: #38b000;
 }
+
+.hidden {
+  display: none;
+}

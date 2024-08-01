@@ -1,0 +1,54 @@
+{
+    "riddlePage": {
+      "stages": [
+        {
+          "stageId": 0,
+          "question": "What has keys but can't open locks?",
+          "answer": "A piano"
+        },
+        {
+          "stageId": 1,
+          "question": "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?",
+          "answer": "An echo"
+        },
+        {
+          "stageId": 2,
+          "question": "The more of this there is, the less you see. What is it?",
+          "answer": "Darkness"
+        }
+      ]
+    },
+    "taskPage": {
+      "stages": [
+        {
+          "stageId": 0,
+          "requiredTasks": [
+            "Complete the initial setup",
+            "Submit the first report"
+          ]
+        },
+        {
+          "stageId": 1,
+          "requiredTasks": [
+            "Participate in the mid-project review",
+            "Update the project documentation"
+          ],
+          "optionalTasks": [
+            "Attend the optional webinar",
+            "Complete the extra practice problems"
+          ]
+        },
+        {
+            "stageId": 2,
+            "requiredTasks": [
+              "Participate in the mid-project review",
+              "Update the project documentation"
+            ],
+            "optionalTasks": [
+              "Attend the optional webinar",
+              "Complete the extra practice problems"
+            ]
+          }
+      ]
+    }
+  }
