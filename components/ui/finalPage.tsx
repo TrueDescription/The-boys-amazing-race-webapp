@@ -29,7 +29,8 @@ export default function FinalPage() {
                     return data;
                 }
             }).then(data => {
-                if (data.hasOwnProperty('pageState') && data.hasOwnProperty('riddleStage') && data.hasOwnProperty('taskStage')
+
+                if (data.hasOwnProperty('pagestate') && data.hasOwnProperty('riddlestage') && data.hasOwnProperty('taskstage')
                     && data.hasOwnProperty('created_at')) {
                     if (data.pageState == 1) {
                         router.push('/task');
@@ -39,15 +40,18 @@ export default function FinalPage() {
                         return;
                     }
                     const now = new Date().getTime();
-                    const startTime = new Date(data.created_at ).getTime();
-                    setStartTime(new Date(data.created_at).toLocaleTimeString());
-                    const finalTime = Math.abs(now - startTime) ;
+                    const startTimeUTC = new Date(data.created_at);
+                    startTimeUTC.setHours(startTimeUTC.getHours() - 4);
+
+                    setStartTime(startTimeUTC.toLocaleTimeString());
+
+                    const finalTime = Math.abs(now - startTimeUTC);
                     const hours = Math.floor(finalTime / (1000 * 60 * 60));
                     const minutes = Math.floor((finalTime % (1000 * 60 * 60)) / (1000 * 60));
                     const seconds = Math.floor((finalTime % (1000 * 60)) / 1000);
 
                     const formattedTime = `${hours}:${minutes}:${seconds}`;
-                    setFormattedTime(`${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+                    setFormattedTime(`Hours:${hours} Minutes:${minutes.toString().padStart(2, '0')} Seconds:${seconds.toString().padStart(2, '0')}`);
                     console.log(`Time difference is ${formattedTime}`);
                     setLoadingData(false);
                 }
@@ -57,12 +61,15 @@ export default function FinalPage() {
       }, [session, status]);
 
     if (status === 'loading' || !session || loadingData) {
+        console.log(status);
+        console.log(session);
+        console.log(loadingData);
         return (
             <div className='CenteredDiv'>
                 <Spinner label="Loading..." />
             </div>
         );
-    }   
+    } 
 
     return (
         <div className="flex flex-col items-center p-4">

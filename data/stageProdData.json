@@ -1,0 +1,58 @@
+{
+    "riddlePage": {
+      "stages": [
+        {
+          "stageId": 0,
+          "question": "",
+          "answer": ""
+        },
+        {
+          "stageId": 1,
+          "question": "",
+          "answer": ""
+        },
+        {
+          "stageId": 2,
+          "question": "",
+          "answer": ""
+        }
+      ]
+    },
+    "taskPage": {
+      "stages": [
+        {
+            "stageId": 0,
+            "requiredTasks": [
+                "Complete the initial setup",
+                "Submit the first report"
+            ],
+            "optionalTasks": [
+                "Attend the optional webinar",
+                "Complete the extra practice problems"
+            ]
+        },
+        {
+            "stageId": 1,
+            "requiredTasks": [
+                "Participate in the mid-project review",
+                "Update the project documentation"
+            ],
+            "optionalTasks": [
+                "Attend the optional webinar",
+                "Complete the extra practice problems"
+            ]
+        },
+        {
+            "stageId": 2,
+            "requiredTasks": [
+                "Participate in the mid-project review",
+                "Update the project documentation"
+            ],
+            "optionalTasks": [
+                "Attend the optional webinar",
+                "Complete the extra practice problems"
+            ]
+        }
+      ]
+    }
+  }

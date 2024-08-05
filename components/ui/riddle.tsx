@@ -31,44 +31,9 @@ function RiddlePage() {
     const [loadingData, setLoadingData] = useState(true);
     const [progress, setProgress] = useState(0);
     const router = useRouter();
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.toLowerCase();
-        if (value === answer) {
-            console.log('success');
-            setIsCorrect(true);
-            setSubmitted(false);
-            // let x = 0;
-            // const intervalId = setInterval(() => {
-            //     if (x >= 30) {
-            //         clearInterval(intervalId);
-            //     }
-            //     x += 1
-            //     // setProgress(prevProgress => prevProgress + 4);
-            // }, 100);
-            const existingPin = sql`UPDATE team
-                                SET
-                                    riddleStage = riddleStage + 1,   
-                                    pageState = 1 
-                                WHERE pin = ${session?.user.pin};`
-            .then( () => {
-                // setTimeout(() => {
-                //     router.push('/task')
-                // }, 3000);
-                router.push("/task");
-            });
-            
-            
-            
-        } else {
-            setIsCorrect(false);
-        }
-        // setAnswer(value);
-        // console.log(value);
-    };
-
-
     const { data: session, status } = useSession();
+
+
     // console.log(session?.user.pin);
     useEffect(() => {
         // console.log(session);
@@ -93,14 +58,16 @@ function RiddlePage() {
                     return data;
                 }
             }).then(data => {
-                if (data.hasOwnProperty('pageState') && data.hasOwnProperty('riddleStage') && data.hasOwnProperty('taskStage')) {
-                    if (data.pageState == 1) {
+                console.log(data)
+                if (data.hasOwnProperty('pagestate') && data.hasOwnProperty('riddlestage') && data.hasOwnProperty('taskstage')) {
+                    if (data.pagestate == 1) {
                         router.push('/task');
                         return;
-                    } else if (data.pageState == 2) {
+                    } else if (data.pagestate == 2) {
                         router.push('/finalPage');
-                    }
-                    const currStageData = stageData['riddlePage']['stages'][data.riddleStage];
+                        return;
+                    } 
+                    const currStageData = stageData['riddlePage']['stages'][data.riddlestage];
                     setAnswer(currStageData.answer.toLowerCase());
                     setRiddle(currStageData.question);
                     setLoadingData(false);
@@ -109,6 +76,32 @@ function RiddlePage() {
             // pull data from db using pin
         }
       }, [session, status]);
+
+
+      const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.toLowerCase();
+        const pin = session?.user.pin;
+        if (value === answer) {
+            console.log('success');
+            setIsCorrect(true);
+            setSubmitted(false);
+            fetch('/api/update', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pin, page : 'riddle' })
+            })
+            .then( () => {
+                router.push("/task");
+            });
+            
+            
+            
+            
+            
+        } else {
+            setIsCorrect(false);
+        }
+    };
 
     if (status === 'loading' || !session || loadingData) {
         return (

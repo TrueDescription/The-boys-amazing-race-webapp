@@ -59,39 +59,25 @@ function Task() {
 
     function submitTask() {
         setSubmitted(false);
-        // change the db page stage
-        // increment the optional task count
         let x = 0;
         Object.values(optionalStates).forEach((element) => {
             if (element) {
                 x++;
             }
         })
-        // change the db page stage
-        // increment the optional task count
-        // this works ^
-        const existingPin = sql`UPDATE team
-                                SET
-                                    optionalCount = optionalCount + ${x},  
-                                    taskStage = taskStage + 1,   
-                                    pageState = ${finalFlag} 
-                                WHERE pin = ${session?.user.pin};`
+        const pin = session?.user.pin;
+        fetch('/api/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pin, page : 'task', x, finalFlag })
+        })
             .then( () => {
-                // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!" + x);
-                // const intervalId = setInterval(() => {
-                //     if (x >= 30) {
-                //         clearInterval(intervalId);
-                //     }
-                //     x += 1
-                //     setProgress(prevProgress => prevProgress + 4);
-                // }, 100);
-                // setTimeout(() => {
-                //     router.push("/riddle");
-                // }, 3000);
                 if (finalFlag == 2) {
                     router.push('/finalPage');
+                    return;
                 } else {
                     router.push("/riddle");
+                    return;
                 }
             });
 
@@ -117,21 +103,22 @@ function Task() {
             }).then(data => {
                 tasks.length = 0;
                 optionalTasks.length = 0;
-                if (data.hasOwnProperty('pageState') && data.hasOwnProperty('riddleStage') && data.hasOwnProperty('taskStage')) {
-                    if (data.pageState == 0) { // change back to 0 after dev
+                if (data.hasOwnProperty('pagestate') && data.hasOwnProperty('riddlestage') && data.hasOwnProperty('taskstage')) {
+                    if (data.pagestate == 0) { // change back to 0 after dev
                         router.push('/riddle');
                         return;
-                    } else if (data.pageState == 2) {
+                    } else if (data.pagestate == 2) {
                         router.push('/finalPage');
+                        return;
                     }
-                    if (data.taskStage + 1 == stageData['taskPage']['stages'].length) {
+                    if (data.taskstage + 1 == stageData['taskPage']['stages'].length) {
                         setFinalFlag(2);
                     }
-                    const currStageData = stageData['taskPage']['stages'][data.taskStage];
+                    const currStageData = stageData['taskPage']['stages'][data.taskstage];
                     currStageData.requiredTasks.forEach((element, i) => {
                         tasks.push({id: i, text : element});
                     });
-                    if (stageData['taskPage']['stages'][data.taskStage].hasOwnProperty('optionalTasks')) {
+                    if (stageData['taskPage']['stages'][data.taskstage].hasOwnProperty('optionalTasks')) {
                         currStageData.optionalTasks?.forEach((element, i) => {
                             optionalTasks.push({id: i, text : element});
                         });
