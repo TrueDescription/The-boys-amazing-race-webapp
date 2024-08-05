@@ -3,18 +3,28 @@
       "stages": [
         {
           "stageId": 0,
-          "question": "",
+          "question": "Head to Historic St. John’s Episcopal Church",
           "answer": ""
         },
         {
           "stageId": 1,
-          "question": "",
+          "question": "Head to Virginia Holocaust Museum",
           "answer": ""
         },
         {
           "stageId": 2,
-          "question": "",
+          "question": "Head to Virginia State Capitol",
           "answer": ""
+        },
+        {
+            "stageId": 3,
+            "question": "Head to VCU",
+            "answer": ""
+        },
+        {
+            "stageId": 4,
+            "question": "Head to William Byrd Park",
+            "answer": ""
         }
       ]
     },
@@ -23,34 +33,52 @@
         {
             "stageId": 0,
             "requiredTasks": [
-                "Complete the initial setup",
-                "Submit the first report"
-            ],
-            "optionalTasks": [
-                "Attend the optional webinar",
-                "Complete the extra practice problems"
+                "Perform the final verse from the presidential speech performed at this church; ‘It is in vain, sir, to extenuate the matter. Gentlemen may cry, Peace, Peace but there is no peace. The war is actually begun! The next gale that sweeps from the north will bring to our ears the clash of resounding arms! Our brethren are already in the field! Why stand we here idle? What is it that gentlemen wish? What would they have? Is life so dear, or peace so sweet, as to be purchased at the price of chains and slavery? Forbid it, Almighty God! I know not what course others may take; but as for me, give me liberty or give me death!’",
+                "",
+                ""
             ]
         },
         {
             "stageId": 1,
             "requiredTasks": [
-                "Participate in the mid-project review",
-                "Update the project documentation"
+                ""
             ],
             "optionalTasks": [
-                "Attend the optional webinar",
-                "Complete the extra practice problems"
+                "",
+                ""
             ]
         },
         {
             "stageId": 2,
             "requiredTasks": [
-                "Participate in the mid-project review",
-                "Update the project documentation"
+                "RDR2 Greetings; give examples"
             ],
             "optionalTasks": [
-                "Attend the optional webinar",
-                "Complete the extra practice problems"
+                "",
+                ""
+            ]
+        },
+        {
+            "stageId": 3,
+            "requiredTasks": [
+                "Film a 1 minute tik tok styled dance lip sync video; best video gets a 10 minute reduction on their final time",
+                "Hit a trick shot",
+                "Challenge a stranger to a race and win"
+            ],
+            "optionalTasks": [
+                "",
+                ""
+            ]
+        },
+        {
+            "stageId": 4,
+            "requiredTasks": [
+                "Pull up bar",
+                "Find the picture"
+            ],
+            "optionalTasks": [
+                "Take a dip",
+                ""
             ]
         }
       ]
