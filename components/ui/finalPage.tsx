@@ -29,13 +29,13 @@ export default function FinalPage() {
                     return data;
                 }
             }).then(data => {
-                
+
                 if (data.hasOwnProperty('pagestate') && data.hasOwnProperty('riddlestage') && data.hasOwnProperty('taskstage')
                     && data.hasOwnProperty('created_at')) {
-                    if (data.pageState == 1) {
+                    if (data.pagestate == 1) {
                         router.push('/task');
                         return;
-                    } else if (data.pageState == 0) {
+                    } else if (data.pagestate == 0) {
                         router.push('/riddle');
                         return;
                     }
