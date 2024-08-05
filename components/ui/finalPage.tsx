@@ -29,7 +29,7 @@ export default function FinalPage() {
                     return data;
                 }
             }).then(data => {
-
+                
                 if (data.hasOwnProperty('pagestate') && data.hasOwnProperty('riddlestage') && data.hasOwnProperty('taskstage')
                     && data.hasOwnProperty('created_at')) {
                     if (data.pageState == 1) {
@@ -45,7 +45,7 @@ export default function FinalPage() {
 
                     setStartTime(startTimeUTC.toLocaleTimeString());
 
-                    const finalTime = Math.abs(now - startTimeUTC);
+                    const finalTime = Math.abs(now - startTimeUTC.getTime());
                     const hours = Math.floor(finalTime / (1000 * 60 * 60));
                     const minutes = Math.floor((finalTime % (1000 * 60 * 60)) / (1000 * 60));
                     const seconds = Math.floor((finalTime % (1000 * 60)) / 1000);
