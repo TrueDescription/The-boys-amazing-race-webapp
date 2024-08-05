@@ -7,6 +7,7 @@ import { Button } from "@nextui-org/button";
 import {Progress} from "@nextui-org/progress";
 import { useRouter } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
+import { sql } from "@vercel/postgres";
 import stageData from '@/data/stageData.json'
 
 
@@ -25,6 +26,7 @@ function Task() {
     const [submitted, setSubmitted] = useState(true);
     const [progress, setProgress] = useState(0);
     const [loadingData, setLoadingData] = useState(true);
+    const [finalFlag, setFinalFlag] = useState(0);
     // const [optional, setOptional] = useState(false);
     const router = useRouter();
 
@@ -35,7 +37,7 @@ function Task() {
         }, {} as Record<number, boolean>)
     );
     const [optionalStates, setOptionalStates] = useState<Record<number, boolean>>(
-        tasks.reduce((acc, task) => {
+        optionalTasks.reduce((acc, task) => {
             acc[task.id] = false;
             return acc;
         }, {} as Record<number, boolean>)
@@ -57,17 +59,43 @@ function Task() {
 
     function submitTask() {
         setSubmitted(false);
+        // change the db page stage
+        // increment the optional task count
         let x = 0;
-        const intervalId = setInterval(() => {
-            if (x >= 30) {
-                clearInterval(intervalId);
+        Object.values(optionalStates).forEach((element) => {
+            if (element) {
+                x++;
             }
-            x += 1
-            setProgress(prevProgress => prevProgress + 4);
-        }, 100);
-        setTimeout(() => {
-            router.push("/riddle");
-        }, 3000);
+        })
+        // change the db page stage
+        // increment the optional task count
+        // this works ^
+        const existingPin = sql`UPDATE team
+                                SET
+                                    optionalCount = optionalCount + ${x},  
+                                    taskStage = taskStage + 1,   
+                                    pageState = ${finalFlag} 
+                                WHERE pin = ${session?.user.pin};`
+            .then( () => {
+                // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!" + x);
+                // const intervalId = setInterval(() => {
+                //     if (x >= 30) {
+                //         clearInterval(intervalId);
+                //     }
+                //     x += 1
+                //     setProgress(prevProgress => prevProgress + 4);
+                // }, 100);
+                // setTimeout(() => {
+                //     router.push("/riddle");
+                // }, 3000);
+                if (finalFlag == 2) {
+                    router.push('/finalPage');
+                } else {
+                    router.push("/riddle");
+                }
+            });
+
+        
     }
     
     const { data: session, status } = useSession();
@@ -90,9 +118,14 @@ function Task() {
                 tasks.length = 0;
                 optionalTasks.length = 0;
                 if (data.hasOwnProperty('pageState') && data.hasOwnProperty('riddleStage') && data.hasOwnProperty('taskStage')) {
-                    if (data.pageState == 1) { 
+                    if (data.pageState == 0) { // change back to 0 after dev
                         router.push('/riddle');
                         return;
+                    } else if (data.pageState == 2) {
+                        router.push('/finalPage');
+                    }
+                    if (data.taskStage + 1 == stageData['taskPage']['stages'].length) {
+                        setFinalFlag(2);
                     }
                     const currStageData = stageData['taskPage']['stages'][data.taskStage];
                     currStageData.requiredTasks.forEach((element, i) => {
@@ -179,7 +212,7 @@ function Task() {
                     Submit Tasks!
                 </Button>
             </div>
-            <Progress style={{marginTop : "10px", display : submitted ? 'none' : 'inline'}} aria-label="Loading..." value={progress} className="max-w-md"/>
+            <Progress style={{marginTop : "10px", display : submitted ? 'none' : 'inline'}} aria-label="Loading..." isIndeterminate className="max-w-md"/>
         </div>
     );
 }

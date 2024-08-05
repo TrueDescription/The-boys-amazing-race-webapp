@@ -38,18 +38,27 @@ function RiddlePage() {
             console.log('success');
             setIsCorrect(true);
             setSubmitted(false);
-            let x = 0;
-
-            const intervalId = setInterval(() => {
-                if (x >= 30) {
-                    clearInterval(intervalId);
-                }
-                x += 1
-                setProgress(prevProgress => prevProgress + 4);
-            }, 100);
-            setTimeout(() => {
-                router.push('/task')
-            }, 3000);
+            // let x = 0;
+            // const intervalId = setInterval(() => {
+            //     if (x >= 30) {
+            //         clearInterval(intervalId);
+            //     }
+            //     x += 1
+            //     // setProgress(prevProgress => prevProgress + 4);
+            // }, 100);
+            const existingPin = sql`UPDATE team
+                                SET
+                                    riddleStage = riddleStage + 1,   
+                                    pageState = 1 
+                                WHERE pin = ${session?.user.pin};`
+            .then( () => {
+                // setTimeout(() => {
+                //     router.push('/task')
+                // }, 3000);
+                router.push("/task");
+            });
+            
+            
             
         } else {
             setIsCorrect(false);
@@ -88,6 +97,8 @@ function RiddlePage() {
                     if (data.pageState == 1) {
                         router.push('/task');
                         return;
+                    } else if (data.pageState == 2) {
+                        router.push('/finalPage');
                     }
                     const currStageData = stageData['riddlePage']['stages'][data.riddleStage];
                     setAnswer(currStageData.answer.toLowerCase());
@@ -126,7 +137,7 @@ function RiddlePage() {
                 </Card>
 
             </div>
-            <Progress style={{marginTop : "10px", display : submitted ? 'none' : 'inline'}} aria-label="Loading..." value={progress} className="max-w-md"/>
+            <Progress style={{marginTop : "10px", display : submitted ? 'none' : 'inline'}} aria-label="Loading..." isIndeterminate className="max-w-md"/>
         </div>
     );
 }

@@ -3,12 +3,14 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 // CREATE TABLE team (
-//     pin INTEGER,
-//     pageState INTEGER,
-//     riddleStage INTEGER,
-//     taskStage INTEGER
+//   pin INTEGER,
+//   pageState INTEGER,
+//   riddleStage INTEGER,
+//   taskStage INTEGER,
+//   optionalCount INTEGER DEFAULT 0,
+//   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+//   final_time TIMESTAMP DEFAULT NULL
 // );
-
 
 export default NextAuth({
   secret: process.env.NEXTAUTH_SECRET,

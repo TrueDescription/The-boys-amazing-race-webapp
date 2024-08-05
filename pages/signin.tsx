@@ -14,7 +14,7 @@ import { signIn } from 'next-auth/react';
 
 export default function Login() {
 
-    const router = useRouter()
+    const router = useRouter();
     const [pin, setPin] = useState('');
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [loadingDisplay, setLoad] = useState(false);
