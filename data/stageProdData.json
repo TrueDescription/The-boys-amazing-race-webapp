@@ -3,28 +3,23 @@
       "stages": [
         {
           "stageId": 0,
-          "question": "Head to Historic St. John’s Episcopal Church",
-          "answer": ""
+          "question": "In a city where history's heart beats strong, A place where a famous speech did belong. In a building that stands with a colonial touch, The past and present meet—where am I, so much?",
+          "answer": "Historic St. John's Church"
         },
         {
           "stageId": 1,
-          "question": "Head to Virginia Holocaust Museum",
-          "answer": ""
+          "question": "In a city where the state's laws are born, A grand building stands, where history's adorned. Named for a state and its legislative might, It’s where decisions are made in the light. What’s the name of this historic site, Where governance and grandeur unite?",
+          "answer": "Virginia State Capitol"
         },
         {
-          "stageId": 2,
-          "question": "Head to Virginia State Capitol",
-          "answer": ""
+            "stageId": 2,
+            "question": "In a commonwealth's realm where minds take flight, There’s a place that fosters insight. It carries a name tied to its state’s pride, Where learning and growth are deeply tied. What is this entity, known for its quest, Where knowledge and learning find their best?",
+            "answer": "Virginia Commonwealth University"
         },
         {
             "stageId": 3,
-            "question": "Head to VCU",
-            "answer": ""
-        },
-        {
-            "stageId": 4,
-            "question": "Head to William Byrd Park",
-            "answer": ""
+            "question": "In a city where green spaces invite, There’s a place named for a figure of light. A park where nature and calm intertwine, Named for a name with a historic line. What is this serene spot, peaceful and stark, Where leisure and history leave their mark?",
+            "answer": "William Byrd Park"
         }
       ]
     },
@@ -34,51 +29,51 @@
             "stageId": 0,
             "requiredTasks": [
                 "Perform the final verse from the presidential speech performed at this church; ‘It is in vain, sir, to extenuate the matter. Gentlemen may cry, Peace, Peace but there is no peace. The war is actually begun! The next gale that sweeps from the north will bring to our ears the clash of resounding arms! Our brethren are already in the field! Why stand we here idle? What is it that gentlemen wish? What would they have? Is life so dear, or peace so sweet, as to be purchased at the price of chains and slavery? Forbid it, Almighty God! I know not what course others may take; but as for me, give me liberty or give me death!’",
-                "",
-                ""
+                "Perform a 2v2 civil war firing line",
+                "FULL DAY TASK: For the rest of the day try to find a photo with the most American flags in it; Winning team gets 10 minute reduction",
+                "FULL DAY TASK: Take a photo of every statue of a white person you see"
+            ]
+            "optionalTasks": [
+                "Perform the required speech above in a foreign accent"
             ]
         },
         {
             "stageId": 1,
             "requiredTasks": [
-                ""
+                "Each player gives a RDR2 Greeting to a stranger; Half have to be honourable and the other has to be dishonourable",
+                "Ask someone to take a photo and when they are ready, make Ahegao faces",
+                "Try and have a conversation with a stranger to settle an argument between the group about whether an interracial alien relationship is okay or not."
             ],
             "optionalTasks": [
-                "",
-                ""
+                "Neck Slap Bet! Go in order and play the penis game. First one to chicken out gets neck slapped."
             ]
         },
         {
             "stageId": 2,
             "requiredTasks": [
-                "RDR2 Greetings; give examples"
+                "Film a 1 minute tik tok styled dance lip sync video; best video gets a 10 minute reduction on their final time",
+                "Hit a trick shot, the more impressive trickshot gets a 10 minute reduction on their final time",
+                "Challenge a stranger to a race and win",
+                "Find someone named James or Mary",
+                "Try to get into a classroom and play a game of 'One minute'; Tournament style choose a random conspiracy topic and you have to talk about that topic for a minute. If you stutter or stop too hard, you lose the match. The winner doesn't pitch for dinner tonight"
             ],
             "optionalTasks": [
-                "",
-                ""
+                "Convince a stranger that they look like a celebrity and take a photo with them",
+                "Do a spontaneous no rehearsing flash mob in a populated area"
             ]
         },
         {
             "stageId": 3,
             "requiredTasks": [
-                "Film a 1 minute tik tok styled dance lip sync video; best video gets a 10 minute reduction on their final time",
-                "Hit a trick shot",
-                "Challenge a stranger to a race and win"
+                "Pull up bar challenge neck slap bet; hang on the bar for as long as you can, winner neck slaps the losers",
+                "Find the picture: https://imgur.com/a/Jhsqi1b",
+                "Find the picture: https://imgur.com/a/orNLTsS"
             ],
             "optionalTasks": [
-                "",
-                ""
-            ]
-        },
-        {
-            "stageId": 4,
-            "requiredTasks": [
-                "Pull up bar",
-                "Find the picture"
-            ],
-            "optionalTasks": [
-                "Take a dip",
-                ""
+                "Take a dip (neck deep)",
+                "Walk around the entire time while you are on this stage listening to gay remixes of songs",
+                "Fake a argument and "
+
             ]
         }
       ]
